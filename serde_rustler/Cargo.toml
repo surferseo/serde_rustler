@@ -17,6 +17,12 @@ crate-type = ["rlib"]
 [dependencies]
 lazy_static = "1.4.0"
 quick-error = "1.2"
-rustler = "0.21.0"
-rustler_codegen = "0.21.0"
 serde = "1.0"
+
+[dependencies.rustler]
+git = 'https://github.com/surfer/rustler'
+branch = '0.21.2-apple-silicon'
+
+[dependencies.rustler_codegen]
+git = 'https://github.com/surfer/rustler'
+branch = '0.21.2-apple-silicon'

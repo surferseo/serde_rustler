@@ -19,9 +19,9 @@ serde_rustler = { path = "../../../serde_rustler" }
 serde-transcode = "1.1"
 
 [dependencies.rustler]
-git = 'https://github.com/surfer/rustler'
+git = 'https://github.com/surferseo/rustler'
 branch = '0.21.2-apple-silicon'
 
 [dependencies.rustler_codegen]
-git = 'https://github.com/surfer/rustler'
+git = 'https://github.com/surferseo/rustler'
 branch = '0.21.2-apple-silicon'

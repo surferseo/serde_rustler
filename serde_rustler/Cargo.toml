@@ -20,9 +20,9 @@ quick-error = "1.2"
 serde = "1.0"
 
 [dependencies.rustler]
-git = 'https://github.com/surfer/rustler'
+git = 'https://github.com/surferseo/rustler'
 branch = '0.21.2-apple-silicon'
 
 [dependencies.rustler_codegen]
-git = 'https://github.com/surfer/rustler'
+git = 'https://github.com/surferseo/rustler'
 branch = '0.21.2-apple-silicon'

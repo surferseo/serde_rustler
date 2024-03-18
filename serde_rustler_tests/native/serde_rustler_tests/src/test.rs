@@ -9,7 +9,7 @@ use rustler::{Encoder, Env, NifResult, Term};
 use serde::{Deserialize, Serialize};
 use serde_bytes::Bytes;
 use serde_rustler::{atoms, from_term, to_term};
-use std::{collections::HashMap, error::Error as StdError, fmt::Debug};
+use std::{collections::HashMap, fmt::Debug};
 
 /// Serializes or deserializes a known Elixir term to/from a known Rust value, asserts that the resulting is equivalent to known term/value.
 #[inline]
@@ -193,7 +193,7 @@ where
 {
     match to_term(env, actual) {
         Err(reason) => {
-            let reason_term = reason.description().encode(env);
+            let reason_term = reason.to_string().encode(env);
             TestResult::Err(error_tuple(env, reason_term))
         }
         Ok(actual_term) => {
@@ -206,14 +206,14 @@ where
     }
 }
 
-/// Deserializes the expected Elixir term, and asserts that the resulting Rust value is equal to the actual value. Returns `:ok` or `{:error, err.description}`.
+/// Deserializes the expected Elixir term, and asserts that the resulting Rust value is equal to the actual value. Returns `:ok` or `{:error, err.to_string}`.
 fn run_de_test<'a, T>(env: Env<'a>, actual: &T, expected_term: Term<'a>) -> TestResult<'a>
 where
     T: Debug + PartialEq + Deserialize<'a>,
 {
     match from_term(expected_term) {
         Err(reason) => {
-            let reason_term = reason.description().encode(env);
+            let reason_term = reason.to_string().encode(env);
             TestResult::Err(error_tuple(env, reason_term))
         }
         Ok(expected) => {

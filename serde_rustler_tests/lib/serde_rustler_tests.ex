@@ -3,7 +3,13 @@ defmodule SerdeRustlerTests do
   NIF wrapping Serializer and Deserializer tests written in the `native` rust crate.
   """
 
-  use Rustler, otp_app: :serde_rustler_tests
+  use Rustler,
+    otp_app: :serde_rustler_tests,
+    path: "./native/serde_rustler_tests",
+    crate: :serde_rustler_tests,
+    mode: if(Mix.env() == :prod, do: :release, else: :debug),
+    default_features: true,
+    features: []
 
   def decode_json(_json_string), do: err()
   def decode_json_dirty(_json_string), do: err()

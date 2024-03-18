@@ -20,16 +20,10 @@ serde_rustler = "0.0.3"
 ## Quick Start
 
 ```rust
-#[macro_use] extern crate rustler;
-
 use serde::{Serialize, Deserialize}
 use serde_rustler::{from_term, to_term};
 
-rustler_export_nifs! {
-    "Elixir.SerdeRustlerTests",
-    [("nif", 1, nif)],
-    None
-}
+rustler::init!("Elixir.SerdeRustlerTests", [nif]);
 
 #[derive(Serialize, Deserialize)]
 struct Animal = { ... };
@@ -48,18 +42,11 @@ fn nif<'a>(env: Env<'a>, args: &[Term<'a>]) -> NifResult<Term<'a>> {
 Below is a more comprehensive example of how you might use `serde_rustler` within a rust NIF...
 
 ```rust
-#[macro_use]
-extern crate rustler;
-
-use rustler::{Env, error::Error as NifError, NifResult, Term};
+use rustler::{Env, NifResult, Term};
 use serde::{Serialize, Deserialize};
 use serde_rustler::{from_term, to_term};
 
-rustler_export_nifs! {
-    "Elixir.SerdeNif",
-    [("readme", 1, readme)],
-    None
-}
+rustler::init!("Elixir.SerdeNif", [readme]);
 
 // NOTE: to serialize to the correct Elixir record, you MUST tell serde to
 // rename the variants to the full Elixir record module atom.
